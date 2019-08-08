@@ -20,18 +20,21 @@ function handleError(err) {
     }
 };
 
-// drone.send("takeoff", 0, 8, PORT, HOST, handleError);
-
 const commands = ["command", "battery?", "takeoff", "land"];
+
+let i = 0;
+
+drone.send('command', 0, 'command'.length, PORT, HOST, handleError);
 
 async function go() {
     const command = commands[i];
     const delay = commandDelays[command];
-    console.log(`running command ${command}`);
+    console.log(`requesting command: ${command}`);
     drone.send(command, 0, command.length, PORT, HOST, handleError);
     await wait(delay);
+    i += 1;
     if (i < commands.length) {
-        return go()
+        return go();
     }
-    console.log("command exicuted");
-}
+    console.log('demonstration finished!');
+};
