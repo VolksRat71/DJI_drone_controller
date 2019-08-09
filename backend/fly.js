@@ -3,15 +3,25 @@ const wait = require("waait");
 const commandDelays = require("./commandDelays");
 
 // req & res address for drone functions
-const PORT = 8889;
+const commandPORT = 8889;
+const statePORT = 8890;
 const HOST = "192.168.10.1";
 
-const drone = dgram.createSocket("udp4");
-drone.bind(PORT);
+// converts tello state string into an array of smaller arrays 
+function stateParser(state) {
+    return state.split(";").map(x => x.split(":"));
+};
 
-// // req & res address for drone state
-// const droneState = dgram.createSocket("udp4");
-// droneState.bind(8890);
+// drone action recived by port 8889
+const drone = dgram.createSocket("udp4");
+drone.bind(commandPORT);
+
+// drone state recived by port 8890
+const droneState = dgram.createSocket("udp4");
+droneState.bind(statePORT);
+
+// drone in development mode
+drone.send("command", 0, 7, commandPORT, HOST, handleError);
 
 // res from drone for function error or completeion
 drone.on("message", message => {
@@ -19,9 +29,14 @@ drone.on("message", message => {
 });
 
 // res from drone for state
-// droneState.on("message", message => {
-//     console.log(`🚁: ${message}`);
-// });
+droneState.on("message", message => {
+    state = `${message}`;
+    console.log(state.toString());
+    const formatState = stateParser(state);
+    console.log(formatState);
+});
+
+
 
 function handleError(err) {
     if (err) {
@@ -42,7 +57,7 @@ function automation() {
         const command = commands[i];
         const delay = commandDelays[command];
         console.log(`requesting command: ${command}`);
-        drone.send(command, 0, command.length, PORT, HOST, handleError);
+        drone.send(command, 0, command.length, commandPORT, HOST, handleError);
         await wait(delay);
         i += 1;
         if (i < commands.length) {
