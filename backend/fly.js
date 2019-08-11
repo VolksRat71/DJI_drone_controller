@@ -3,6 +3,7 @@ const wait = require("waait");
 const app = require("express")();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
+const throttle = require('lodash/throttle');
 const commandDelays = require("./commandDelays");
 
 // req & res address for drone functions
@@ -77,19 +78,20 @@ function automation() {
 io.on("connection", socket => {
     socket.on("command", command => {
         console.log("Mr.Browser your wish is my command");
+        console.log(command);
     });
-
-    droneState.on(
-        "message",
-        // Data flood throttling
-        setTimeout(state => {
-            const formatState = stateParser(state.toString());
-            socket.emit("dronestate", formatState);
-        }, 100)
-    );
 
     socket.emit("status", "CONNECTED");
 });
+
+droneState.on(
+    "message",
+    // Data flood throttling
+    throttle(state => {
+        const formatState = stateParser(state.toString());
+        socket.emit("dronestate", formatState);
+    }, 100)
+);
 
 http.listen(6767, () => {
     console.log("Socket IO server is running")
