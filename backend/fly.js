@@ -1,5 +1,8 @@
 const dgram = require("dgram");
 const wait = require("waait");
+const app = require("express")();
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
 const commandDelays = require("./commandDelays");
 
 // req & res address for drone functions
@@ -69,3 +72,15 @@ function automation() {
 
     go();
 };
+
+io.on("connection", socket => {
+    socket.on("command", command => {
+        console.log("Mr.Browser your wish is my command");
+    });
+
+    socket.emit("status", "CONNECTED");
+});
+
+http.listen(6767, () => {
+    console.log("Socket IO server is running")
+});
