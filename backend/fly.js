@@ -73,10 +73,20 @@ function automation() {
     go();
 };
 
+// IO connection setup
 io.on("connection", socket => {
     socket.on("command", command => {
         console.log("Mr.Browser your wish is my command");
     });
+
+    droneState.on(
+        "message",
+        // Data flood throttling
+        setTimeout(state => {
+            const formatState = stateParser(state.toString());
+            socket.emit("dronestate", formatState);
+        }, 100)
+    );
 
     socket.emit("status", "CONNECTED");
 });
