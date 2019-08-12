@@ -3,7 +3,6 @@ const wait = require("waait");
 const app = require("express")();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
-const throttle = require('lodash/throttle');
 const commandDelays = require("./commandDelays");
 
 // req & res address for drone functions
@@ -35,9 +34,7 @@ drone.on("message", message => {
 // res from drone for state
 droneState.on("message", message => {
     state = `${message}`;
-    console.log(state.toString());
     const formatState = stateParser(state);
-    console.log(formatState);
 });
 
 
@@ -73,6 +70,8 @@ function automation() {
 
     go();
 };
+// comment in line 74 for auto demonstration
+// automation();
 
 // IO connection setup
 io.on("connection", socket => {
@@ -86,13 +85,13 @@ io.on("connection", socket => {
 
 droneState.on(
     "message",
-    // Data flood throttling
-    throttle(state => {
+    state => {
         const formatState = stateParser(state.toString());
-        socket.emit("dronestate", formatState);
-    }, 100)
+        io.emit("dronestate", formatState);
+    }
 );
 
+// socket listen to port 6767
 http.listen(6767, () => {
     console.log("Socket IO server is running")
 });
