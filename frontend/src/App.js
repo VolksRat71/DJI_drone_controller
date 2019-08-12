@@ -6,8 +6,8 @@ import Commands from "./components/Commands";
 function App() {
   return (
     <div className="App">
-      <DroneState />
       <Commands />
+      <DroneState />
     </div>
   );
 };
