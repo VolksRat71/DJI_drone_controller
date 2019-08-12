@@ -1,12 +1,16 @@
 import React from "react";
+import socket from "../Socket/socket"
 
-function sendCommand() {
-    console.log("command sent");
+function sendCommand(command) {
+    return function () {
+        console.log(`command sent: ${command}`);
+        socket.emit("command", command);
+    };
 }
 
 const Commands = () => (
     <div>
-        {/* <button onClick={sendCommand("takeoff")}>Take Off</button>
+        <button onClick={sendCommand("takeoff")}>Take Off</button>
         <button onClick={sendCommand("land")}>Land</button>
         <button onClick={sendCommand("up 20")}>Up 20</button>
         <button onClick={sendCommand("down 20")}>Down 20</button>
@@ -16,7 +20,7 @@ const Commands = () => (
         <button onClick={sendCommand("back 20")}>Back 20</button>
         <button onClick={sendCommand("land")}>Land</button>
         <button onClick={sendCommand("flip f")}>Flip Forward</button>
-        <button onClick="automation()">Automated Sequence</button> */}
+        <button onClick={sendCommand("emergency")}>Emergency</button>
     </div>
 );
 
