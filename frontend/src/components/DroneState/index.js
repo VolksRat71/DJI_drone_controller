@@ -1,22 +1,30 @@
 import socket from "../Socket/socket"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+function useDroneState() {
+    const [droneState, updateDroneState] = useState([]);
+    useEffect(() => {
+        console.log("yo");
+        socket.on("dronestate", updateDroneState);
+    }, []);
+    return droneState;
+};
 
 function useSocket() {
     const [status, updateStatus] = useState("DISCONNECTED");
-
-    socket.on("status", message => {
-        console.log("You've got mail");
-        updateStatus(message);
-    });
+    useEffect(() => {
+        socket.on("status", updateStatus);
+    }, []);
     return status;
 };
 
 const DroneState = () => {
     const status = useSocket();
+    const droneState = useDroneState([]);
     return (
         <div>
             <p>status: {status}</p>
-            I am the drone state
+            <p>state: {droneState}</p>
         </div>
     );
 };

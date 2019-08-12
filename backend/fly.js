@@ -34,9 +34,7 @@ drone.on("message", message => {
 // res from drone for state
 droneState.on("message", message => {
     state = `${message}`;
-    console.log(state.toString());
     const formatState = stateParser(state);
-    console.log(formatState);
 });
 
 
@@ -72,15 +70,28 @@ function automation() {
 
     go();
 };
+// comment in line 74 for auto demonstration
+// automation();
 
+// IO connection setup
 io.on("connection", socket => {
     socket.on("command", command => {
         console.log("Mr.Browser your wish is my command");
+        console.log(command);
     });
 
     socket.emit("status", "CONNECTED");
 });
 
+droneState.on(
+    "message",
+    state => {
+        const formatState = stateParser(state.toString());
+        io.emit("dronestate", formatState);
+    }
+);
+
+// socket listen to port 6767
 http.listen(6767, () => {
     console.log("Socket IO server is running")
 });
