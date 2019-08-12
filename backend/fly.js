@@ -37,7 +37,8 @@ droneState.on("message", message => {
     const formatState = stateParser(state);
 });
 
-
+// drone in development mode
+drone.send("command", 0, 7, commandPORT, HOST, handleError);
 
 function handleError(err) {
     if (err) {
@@ -73,16 +74,19 @@ function automation() {
 // comment in line 74 for auto demonstration
 // automation();
 
-// IO connection setup
+//commands from browser
 io.on("connection", socket => {
     socket.on("command", command => {
-        console.log("Mr.Browser your wish is my command");
+        console.log("Yes Mr.Browser, your wish is my command 🧞");
         console.log(command);
+        // drone in development mode
+        drone.send(command, 0, 10, commandPORT, HOST, handleError);
     });
 
     socket.emit("status", "CONNECTED");
 });
 
+// drone state to browser
 droneState.on(
     "message",
     state => {
