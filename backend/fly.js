@@ -77,7 +77,7 @@ function automation() {
 //commands from browser
 io.on("connection", socket => {
     socket.on("command", command => {
-        console.log("Yes Mr.Browser, your wish is my command 🧞");
+        console.log("Command recived from browser.");
         console.log(command);
         // drone in development mode
         drone.send(command, 0, 10, commandPORT, HOST, handleError);
@@ -97,5 +97,5 @@ droneState.on(
 
 // socket listen to port 6767
 http.listen(6767, () => {
-    console.log("Socket IO server is running")
+    console.log("Socket.io server is running")
 });

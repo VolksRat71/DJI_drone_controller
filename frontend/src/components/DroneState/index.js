@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 function useDroneState() {
     const [droneState, updateDroneState] = useState([]);
     useEffect(() => {
-        console.log("yo");
+        console.log("Drone state stream commence.");
         socket.on("dronestate", updateDroneState);
     }, []);
     return droneState;

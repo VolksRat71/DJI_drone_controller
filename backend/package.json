@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "DJI Drone Controller",
+  "main": "fly.js",
+  "dependencies": {
+    "dgram": "^1.0.1",
+    "express": "^4.17.1",
+    "http": "^0.0.0",
+    "nodemon": "^1.19.1",
+    "socket.io": "^2.2.0",
+    "waait": "^1.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node fly.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Nate Ryan",
+  "license": "ISC"
+}
