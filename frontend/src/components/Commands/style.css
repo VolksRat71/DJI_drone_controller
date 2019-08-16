@@ -1,0 +1,29 @@
+#left-col {
+    text-align: center;
+}
+
+#left {
+    margin-top: 2px;
+    width: 100%;
+    height: 30%;
+}
+
+#center-col {
+    text-align: center;
+}
+
+#center {
+    margin-top: 2px;
+    width: 100%;
+    height: 30%;
+}
+
+#right-col {
+    text-align: center;
+}
+
+#right {
+    margin-top: 2px;
+    width: 100%;
+    height: 30%;
+}

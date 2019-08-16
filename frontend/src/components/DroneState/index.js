@@ -23,7 +23,7 @@ const DroneState = () => {
     const droneState = useDroneState([]);
     return (
         <div>
-            <p>status: {status}</p>
+            <p>server: {status}</p>
             <p>state: {droneState}</p>
         </div>
     );

@@ -83,7 +83,10 @@ io.on("connection", socket => {
         drone.send(command, 0, 10, commandPORT, HOST, handleError);
     });
 
-    socket.emit("status", "CONNECTED");
+    // send connected message every second 
+    setInterval(function () {
+        socket.emit("status", "CONNECTED");
+    }, 1000);
 });
 
 // drone state to browser
