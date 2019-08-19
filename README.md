@@ -21,12 +21,12 @@ from root folder
 ```cd frontend``` ```npm install```
 
 ## Usage
-You will need 2 CLI's to run application. (follwing commands from root folder in order).
+You will need 2 CLI's to run application. (following commands from root folder in order).
 #
 **From CLI #1**
 ```
 cd backend
-node fly.js
+npm run dev
 ```
 #
 **From CLI #2**
@@ -41,5 +41,6 @@ npm start
 - dgram (udp comm between drone & server)
 - Socket.io (tcp comm between browser & server)
 2. React.js
+- Google Materialze  
 - Post v16.7.0 react hooks used
 
