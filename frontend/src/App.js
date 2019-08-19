@@ -7,7 +7,6 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <h4>DJI Tello Drone Controller</h4>
         <div className="row">
           <div className="col s2 card grey darken-4 white-text">
             Battery
