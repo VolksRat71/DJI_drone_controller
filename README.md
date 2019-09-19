@@ -38,9 +38,13 @@ npm start
 ## Technologies Used
 1. Node.js
 - express
-- dgram (udp comm between drone & server)
-- Socket.io (tcp comm between browser & server)
-2. React.js
-- Google Materialze  
-- Post v16.7.0 react hooks used
+- dgram 
+- Socket.io 
+- lodash
+- nodemon
+2. React.js 
+- lodash
+- socket.io-cleint
 
+## Thank you, Wes Bos!
+Wes Bos provided me with the build guide, [check out his stuff!](https://wesbos.com/)  

@@ -1,51 +1,40 @@
-const dgram = require("dgram");
-const wait = require("waait");
-const app = require("express")();
-const http = require("http").Server(app);
-const io = require("socket.io")(http);
-const commandDelays = require("./commandDelays");
+const dgram = require('dgram');
+const wait = require('waait');
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const throttle = require('lodash/throttle');
+const commandDelays = require('./commandDelays');
 
-// req & res address for drone functions
-const commandPORT = 8889;
-const statePORT = 8890;
-const HOST = "192.168.10.1";
+const PORT = 8889;
+const HOST = '192.168.10.1';
+const drone = dgram.createSocket('udp4');
+drone.bind(PORT);
 
-// converts tello state string into an array of smaller arrays 
-function stateParser(state) {
-    return state.split(";").map(x => x.split(":"));
-};
+function parseState(state) {
+    return state
+        .split(';')
+        .map(x => x.split(':'))
+        .reduce((data, [key, value]) => {
+            data[key] = value;
+            return data;
+        }, {});
+}
 
-// drone action recived by port 8889
-const drone = dgram.createSocket("udp4");
-drone.bind(commandPORT);
+const droneState = dgram.createSocket('udp4');
+droneState.bind(8890);
 
-// drone state recived by port 8890
-const droneState = dgram.createSocket("udp4");
-droneState.bind(statePORT);
-
-// drone in development mode
-drone.send("command", 0, 7, commandPORT, HOST, handleError);
-
-// res from drone for function error or completeion
-drone.on("message", message => {
-    console.log(`🚁: ${message}`);
+drone.on('message', message => {
+    console.log(`🚁 : ${message}`);
+    io.sockets.emit('status', message.toString());
 });
-
-// res from drone for state
-droneState.on("message", message => {
-    state = `${message}`;
-    const formatState = stateParser(state);
-});
-
-// drone in development mode
-drone.send("command", 0, 7, commandPORT, HOST, handleError);
 
 function handleError(err) {
     if (err) {
-        console.log("An error has occured");
+        console.log('ERROR');
         console.log(err);
     }
-};
+}
 
 // Prebuilt demonstration
 function automation() {
@@ -74,31 +63,25 @@ function automation() {
 // comment in line 74 for auto demonstration
 // automation();
 
-//commands from browser
-io.on("connection", socket => {
-    socket.on("command", command => {
-        console.log("Command recived from browser.");
+io.on('connection', socket => {
+    socket.on('command', command => {
+        console.log('command Sent from browser');
         console.log(command);
-        // drone in development mode
-        drone.send(command, 0, 10, commandPORT, HOST, handleError);
+        drone.send(command, 0, command.length, PORT, HOST, handleError);
     });
-
-    // send connected message every second 
     setInterval(function () {
         socket.emit("status", "CONNECTED");
     }, 1000);
 });
 
-// drone state to browser
 droneState.on(
-    "message",
-    state => {
-        const formatState = stateParser(state.toString());
-        io.emit("dronestate", formatState);
-    }
+    'message',
+    throttle(state => {
+        const formattedState = parseState(state.toString());
+        io.sockets.emit('dronestate', formattedState);
+    }, 100)
 );
 
-// socket listen to port 6767
 http.listen(6767, () => {
-    console.log("Socket.io server is running")
+    console.log('Socket io server up and running');
 });
