@@ -1,26 +1,42 @@
 import React from 'react';
-import './App.css';
-import DroneState from "./components/DroneState";
-import Commands from "./components/Commands";
+import DroneState from '../src/components/DroneState';
+import Commands from '../src/components/Commands';
 
-function App() {
-  return (
-    <div className="App">
-      <div className="container">
-        <div className="row">
-          <div className="col s2 card grey darken-4 white-text">
-            Battery
-          </div>
-          <div className="col s6 card grey darken-4 white-text">
-            <Commands />
-          </div>
-          <div className="col s3 card grey darken-4 white-text">
-            <DroneState />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+import styled, { createGlobalStyle } from 'styled-components';
 
-export default App;
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: white;
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+    font-family: 'Operator Mono', monospace;
+    font-weight: 900;
+    font-size: 1rem;
+    background:#fff;
+    color: white;
+  }
+  * {
+    font-family: 'Operator Mono', monospace;
+    box-sizing: border-box;
+  }
+  h2 {
+    text-align: center;
+    font-style: italic;
+    color: black
+  }
+`;
+
+const PageStyles = styled.div`
+  max-width: 500px;
+  margin: 0 auto;
+`;
+
+const IndexPage = () => (
+  <PageStyles>
+    <h2>Tello Controller</h2>
+    <GlobalStyle />
+    <Commands />
+    <DroneState />
+  </PageStyles>
+);
+
+export default IndexPage;
