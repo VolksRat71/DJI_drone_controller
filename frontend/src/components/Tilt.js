@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import droneImage from '../static/drone.png'
 
 const TiltWrap = styled.div`
   perspective: 500px;
@@ -15,8 +16,7 @@ const TiltWrap = styled.div`
   }
 `;
 const TiltStyles = styled.div`
-  background-image: url('/static/drone.png');
-  background: black
+  background-image: url(${droneImage});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
