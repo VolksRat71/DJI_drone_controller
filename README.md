@@ -1,5 +1,9 @@
 # DJI Tello Drone Controller
 
+<p align="center">
+  <img height="300" src="./readme_img/img.jpg">
+</p>
+
 Javascript controller designed to work with DJI Tello (created by Ryze, Intel & DJI) 
 
 ## Installation
