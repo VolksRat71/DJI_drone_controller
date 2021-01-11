@@ -17,15 +17,19 @@ ___
 </h1>
 
 <p>
-This was an independent project that built as a student. So this drone was originally intended for STEAM education. So its firmware allows for UDP commands to an I.P address. So we take advantage of that by binding the Drone I.P to a PORT on a node server to send commands through. So we just needed something to interface with the Node server at that point. I used React.js in this case.
+This was an independent project that built as a student. This model of drone was originally intended for STEAM education. So its firmware allows for UDP commands to an I.P address. So we take advantage of that by binding the Drone I.P to a PORT on a node server to send commands through.
 
-So in the end we end up with a stack where the user has a nice and clean interface that sends a through a Socket.io PORT using React Hooks, the Node serve takes those comamnds and translates them to the Drone. Cake! 🍰
+We just needed something to interface with the Node server at that point. I used React.js in this case!
+
+In the end we end up with a stack where the user has a nice and clean interface that sends a through a Socket.io PORT using React Hooks, the Node server takes those commands and translates them to the Drone. Cake! 🍰
 
 ___
 
 <h3 align="center">
     The frontend is hosted on <a href="https://dji-drone-example.herokuapp.com/">Heroku here</a>! But to get the full effect you will need a DJI Tello drone!
 </h3>
+
+
 
 
 
