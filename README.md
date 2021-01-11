@@ -1,54 +1,32 @@
-# DJI Tello Drone Controller
-
 <p align="center">
-  <img height="300" src="https://raw.githubusercontent.com/VolksRat71/DJI_drone_controller/master/readme_img/img.JPG">
+    <img width="65%" src="./readme_img/Tello_Controller.png"/>
 </p>
 
-Javascript controller designed to work with DJI Tello (created by Ryze, Intel & DJI) 
+___
 
-## Installation
+<br>
+
+<p align="center">
+    <img width="85%" src="./readme_img/DroneAnimation.gif"/>
+</p>
+
+<br>
+
+<h1 align="center">
+    What is going on here?!
+</h1>
+
+<p>
+This was an independent project that built as a student. So this drone was originally intended for STEAM education. So its firmware allows for UDP commands to an I.P address. So we take advantage of that by binding the Drone I.P to a PORT on a node server to send commands through. So we just needed something to interface with the Node server at that point. I used React.js in this case.
+
+So in the end we end up with a stack where the user has a nice and clean interface that sends a through a Socket.io PORT using React Hooks, the Node serve takes those comamnds and translates them to the Drone. Cake! 🍰
+
+___
+
+<h3 align="center">
+    The frontend is hosted on <a href="https://dji-drone-example.herokuapp.com/">Heroku here</a>! But to get the full effect you will need a DJI Tello drone!
+</h3>
 
 
-```bash
-git clone https://github.com/VolksRat71/DJI_drone_controller.git
-```
-#
-from root folder 
 
-1. server
-```cd backend```
-```npm install```
 
-2. ```cd ..```
-
-3. browser 
-```cd frontend``` ```npm install```
-
-## Usage
-You will need 2 CLI's to run application. (following commands from root folder in order).
-#
-**From CLI #1**
-```
-cd backend
-npm run dev
-```
-#
-**From CLI #2**
-```
-cd frontend
-npm start
-```
-
-## Technologies Used
-1. Node.js
-- express
-- dgram 
-- Socket.io 
-- lodash
-- nodemon
-2. React.js 
-- lodash
-- socket.io-cleint
-
-## Thank you, Wes Bos!
-Wes Bos provided me with the build guide, [check out his stuff!](https://wesbos.com/)  
