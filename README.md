@@ -29,6 +29,11 @@ ___
     The frontend is hosted on <a href="https://dji-drone-example.herokuapp.com/">Heroku here</a>! But to get the full effect you will need a DJI Tello drone!
 </h3>
 
+<h2 align="center">Hey, lets connect.</h2>
+<p align="center">
+| <a href="tel:5035047581">(503)504-7581</a> ||  <a href="mailto:nathanieljryan1994@gmail.com">nathanieljryan1994@gmail.com</a> || <a href="https://www.linkedin.com/in/nathanieljryan/">LinkedIn</a> || <a href="https://nathanryan.tech/">Portfolio</a> || <a href="https://nathanryan.tech/document/NathanielRyanResume.pdf">Resume</a> |
+</p>
+</div>
 
 
 
