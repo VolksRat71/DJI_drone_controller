@@ -12,50 +12,50 @@ const drone = dgram.createSocket('udp4');
 drone.bind(PORT);
 
 function parseState(state) {
-    return state
-        .split(';')
-        .map(x => x.split(':'))
-        .reduce((data, [key, value]) => {
-            data[key] = value;
-            return data;
-        }, {});
+  return state
+    .split(';')
+    .map((x) => x.split(':'))
+    .reduce((data, [key, value]) => {
+      data[key] = value;
+      return data;
+    }, {});
 }
 
 const droneState = dgram.createSocket('udp4');
 droneState.bind(8890);
 
-drone.send("command", 0, 7, PORT, HOST, handleError);
+drone.send('command', 0, 7, PORT, HOST, handleError);
 
-drone.on('message', message => {
-    console.log(`🚁 : ${message}`);
-    io.sockets.emit('status', message.toString());
+drone.on('message', (message) => {
+  console.log(`🚁 : ${message}`);
+  io.sockets.emit('status', message.toString());
 });
 
 function handleError(err) {
-    if (err) {
-        console.log('ERROR');
-        console.log(err);
-    }
+  if (err) {
+    console.log('ERROR');
+    console.log(err);
+  }
 }
 
-io.on('connection', socket => {
-    socket.on('command', command => {
-        console.log('command Sent from browser');
-        console.log(command);
-        drone.send(command, 0, command.length, PORT, HOST, handleError);
-    });
+io.on('connection', (socket) => {
+  socket.on('command', (command) => {
+    console.log('command Sent from browser');
+    console.log(command);
+    drone.send(command, 0, command.length, PORT, HOST, handleError);
+  });
 
-    socket.emit('status', 'CONNECTED');
+  socket.emit('status', 'CONNECTED');
 });
 
 droneState.on(
-    'message',
-    throttle(state => {
-        const formattedState = parseState(state.toString());
-        io.sockets.emit('dronestate', formattedState);
-    }, 100)
+  'message',
+  throttle((state) => {
+    const formattedState = parseState(state.toString());
+    io.sockets.emit('dronestate', formattedState);
+  }, 100)
 );
 
 http.listen(6767, () => {
-    console.log('Socket io server up and running');
+  console.log('Socket io server up and running');
 });
