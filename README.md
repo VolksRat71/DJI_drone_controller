@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://twitch-drone.herokuapp.com/">
+    <a href="https://twitch-drone.herokuapp.com/&token=gregrg">
         <img width="65%" src="./readme_img/Tello_Controller.png"/>
     </a>
 </p>
@@ -9,7 +9,7 @@ ___
 <br>
 
 <p align="center">
-    <a href="https://dji-drone-example.herokuapp.com/">
+    <a href="https://twitch-drone.herokuapp.com/&token=gregrg">
         <img width="85%" src="./readme_img/DroneAnimation.gif"/>
     </a>
 </p>
@@ -30,7 +30,7 @@ In the end we end up with a stack where the user has a nice and clean interface 
 ___
 
 <h3 align="center">
-    The frontend is hosted on <a href="https://twitch-drone.herokuapp.com/">Heroku here</a>! But to get the full effect you will need a DJI Tello drone!
+    The frontend is hosted on <a href="https://twitch-drone.herokuapp.com/&token=gregrg">Heroku here</a>! But to get the full effect you will need a DJI Tello drone!
 </h3>
 
 ## <p align="center"> Hello, I am Nate. </p>
