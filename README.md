@@ -29,10 +29,6 @@ In the end we end up with a stack where the user has a nice and clean interface 
 
 ___
 
-<h3 align="center">
-    The frontend is hosted on <a href="https://twitch-drone.herokuapp.com/&token=gregrg">Heroku here</a>! But to get the full effect you will need a DJI Tello drone!
-</h3>
-
 ## <p align="center"> Hello, I am Nate. </p>
 
 <p align="center">
