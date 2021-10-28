@@ -9,9 +9,9 @@ ___
 <br>
 
 <p align="center">
-    <a href="https://twitch-drone.herokuapp.com/&token=gregrg">
+<!--     <a href="https://twitch-drone.herokuapp.com/&token=gregrg"> -->
         <img width="85%" src="./readme_img/DroneAnimation.gif"/>
-    </a>
+<!--     </a> -->
 </p>
 
 <br>
